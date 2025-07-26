@@ -1,8 +1,8 @@
 from datetime import datetime
-from .calculators.western_astrology import get_sun_sign, element_compatibility
-from .calculators.chinese_zodiac import get_chinese_zodiac, animal_compatibility
-from .calculators.numerology import get_life_path_number, numerology_compatibility
-from .calculators.feng_shui import calculate_kua, kua_compatibility
+from calculators.western_astrology import get_sun_sign, element_compatibility
+from calculators.chinese_zodiac import get_chinese_zodiac, animal_compatibility
+from calculators.numerology import get_life_path_number, numerology_compatibility
+from calculators.feng_shui import calculate_kua, kua_compatibility
 
 def calculate_compatibility(user1_data: dict, user2_data: dict) -> dict:
     try:
