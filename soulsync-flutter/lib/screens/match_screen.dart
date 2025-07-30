@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import '../services/match_service.dart';
 
 class MatchScreen extends StatefulWidget {
+ final Map<String, dynamic>? user1Data;
+
+  MatchScreen({this.user1Data});
+
   @override
   _MatchScreenState createState() => _MatchScreenState();
 }
@@ -13,37 +17,37 @@ class _MatchScreenState extends State<MatchScreen> {
   Map<String, dynamic>? matchResult;
   bool _loading = false;
 
-  void _calculateMatch() async {
+void _calculateMatch() async {
+  setState(() {
+    _loading = true;
+    matchResult = null;
+  });
+
+  try {
+    final result = await _matchService.getCompatibility(
+      name1: widget.user1Data?['name'] ?? "You",
+      birthDate1: widget.user1Data?['birthDate'] ?? "1990-01-01",
+      gender1: widget.user1Data?['gender'] ?? "female",
+      fullName1: widget.user1Data?['fullName'] ?? "Your Name",
+      name2: "Orion",
+      birthDate2: "1990-01-20",
+      gender2: "male",
+      fullName2: "Orion Star",
+    );
+
     setState(() {
-      _loading = true;
-      matchResult = null;
+      matchResult = result;
+      _loading = false;
     });
-
-    try {
-      final result = await _matchService.getCompatibility(
-        name1: "Luna",
-        birthDate1: "1995-06-15",
-        gender1: "female",
-        fullName1: "Luna Moon",
-        name2: "Orion",
-        birthDate2: "1990-01-20",
-        gender2: "male",
-        fullName2: "Orion Star",
-      );
-
-      setState(() {
-        matchResult = result;
-        _loading = false;
-      });
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: $e")),
-      );
-      setState(() {
-        _loading = false;
-      });
-    }
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Error: $e")),
+    );
+    setState(() {
+      _loading = false;
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {

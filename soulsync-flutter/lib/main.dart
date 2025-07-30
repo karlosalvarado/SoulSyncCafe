@@ -1,6 +1,7 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'screens/user_input_screen.dart';
 import 'screens/match_screen.dart';
 
 void main() {
@@ -17,7 +18,11 @@ class SoulSyncApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFFF0F8FF),
         fontFamily: 'Arial',
       ),
-      home: MatchScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => UserInputScreen(),
+        '/match': (context) => MatchScreen(user1Data: ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?),
+      },
     );
   }
 }
