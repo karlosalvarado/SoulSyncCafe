@@ -61,38 +61,38 @@ class _MatchScreenState extends State<MatchScreen> {
             ),
             SizedBox(height: 30),
 
-            if (matchResult != null)
-              Column(
-                children: [
-                  Text(
-                    "🌟 Compatibility Score",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "${matchResult!['total_score']}/100",
-                    style: TextStyle(fontSize: 40, color: Colors.purple, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    matchResult!['insight'],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-                  ),
-                  SizedBox(height: 20),
-                  _buildBreakdown("Astrology", matchResult!['breakdown']['astrology']),
-                  _buildBreakdown("Chinese Zodiac", matchResult!['breakdown']['chinese_zodiac']),
-                  _buildBreakdown("Numerology", matchResult!['breakdown']['numerology']),
-                  _buildBreakdown("Feng Shui", matchResult!['breakdown']['feng_shui']),
-                ],
-              )
+           if (matchResult != null)
+  Column(
+    children: [
+      Text(
+        "🌟 Compatibility Score",
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 10),
+      Text(
+        "${matchResult!['total_score']}/100",
+        style: TextStyle(fontSize: 40, color: Colors.purple, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 20),
+      Text(
+        matchResult!['insight'],
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+      ),
+      SizedBox(height: 20),
+      _buildBreakdown("Astrology", (matchResult!['breakdown']['astrology'] as num).toDouble()),
+      _buildBreakdown("Chinese Zodiac", (matchResult!['breakdown']['chinese_zodiac'] as num).toDouble()),
+      _buildBreakdown("Numerology", (matchResult!['breakdown']['numerology'] as num).toDouble()),
+      _buildBreakdown("Feng Shui", (matchResult!['breakdown']['feng_shui'] as num).toDouble()),
+    ],
+  )
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBreakdown(String label, double score) {
+  Widget _buildBreakdown(String label, num score) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4),
       child: Row(

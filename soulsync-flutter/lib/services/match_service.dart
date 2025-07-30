@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class MatchService {
   // 🔗 Your live API URL
-  static const String baseUrl = 'https://soulsync-api-5c8a.onrender.com';
+  static const String baseUrl = 'https://soulsynccafe.onrender.com';
 
   /// Calls the /match endpoint and returns compatibility data
   Future<Map<String, dynamic>> getCompatibility({
